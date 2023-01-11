@@ -11,15 +11,17 @@ phases:
       - export ECR_PATH=${REPO_URL}/${IMAGE_NAME}
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 528653706239.dkr.ecr.us-east-1.amazonaws.com
       - REPOSITORY_URI=528653706239.dkr.ecr.us-east-1.amazonaws.com/koo-test
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
       - echo Docker build ...
       - docker build -t $REPOSITORY_URI:latest .
   post_build:
     commands:
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:latest
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
       - docker images
       - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - printf '[{"name":"koo-test","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
