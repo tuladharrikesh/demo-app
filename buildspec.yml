@@ -7,10 +7,10 @@ phases:
       - echo Current Build number is ${CODEBUILD_BUILD_NUMBER}
       - echo current working dir
       - pwd
-      - export IMAGE_NAME=koo-test
+      - export IMAGE_NAME=ab-demo-rep
       - export ECR_PATH=${REPO_URL}/${IMAGE_NAME}
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 528653706239.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_URI=528653706239.dkr.ecr.us-east-1.amazonaws.com/koo-test
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 344604886168.dkr.ecr.us-east-1.amazonaws.com
+      - REPOSITORY_URI=344604886168.dkr.ecr.us-east-1.amazonaws.com/ab-demo-rep
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
@@ -22,7 +22,7 @@ phases:
       - docker images
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - printf '[{"name":"koo-test","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"ab-demo-rep","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
   files:
