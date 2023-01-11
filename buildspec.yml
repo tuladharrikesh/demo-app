@@ -17,10 +17,9 @@ phases:
       - docker build -t $REPOSITORY_URI:latest .
   post_build:
     commands:
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:latest
       - docker images
       - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
       - printf '[{"name":"koo-test","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
