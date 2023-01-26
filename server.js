@@ -6,9 +6,10 @@ const app = express();
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
+app.set('view engine', 'pug')
 // Application
 app.get('/', (req, res) => {
-    res.send("Hello world. This is a demo app.");
+    res.sendFile('index.html', {root: __dirname});
 });
 
 app.listen(PORT, HOST);
