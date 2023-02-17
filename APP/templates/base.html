@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" class="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <title>Sample AWS Website - Sign in and Service tour</title>
+</head>
+
+<body>
+    <header class="base_menu">
+        <nav>
+            <ul class="menu">
+                <li>|<a href="/" class="btn_index"> Home</a></li>
+                <li>|<a href="../list" class="btn_index">services</a></li>
+                <li>|<a href="../create" class="btn_index">add services</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="text_center">
+            <h2>Go with AWS</h2>
+        </div>
+        <div class="client_main">
+            <img src="{{ url_for('static', filename='/img/photos_main/1.jpg') }}" alt="Jeff" width=70%>
+        </div>
+            </div>
+</body>
+
+</html>
