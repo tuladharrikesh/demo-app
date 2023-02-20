@@ -1,0 +1,12 @@
+{% extends 'list.html' %}
+
+{% block content %}
+    <h1>{% block title %} Service Lists {% endblock %}</h1>
+    {% for service in services %}
+        <div class='service'>
+            <h3>#{{ service[0] }} - {{ service[1] }}</h3>
+            <p class='description'>Product Category: {{service[2]}}</p>
+            <p class='product_category'>Desciption: {{service[3] }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
