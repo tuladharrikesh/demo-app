@@ -31,8 +31,6 @@ def get_db_connection():
 @app.route('/')
 def index():
     return render_template('index.html')
-    #return render_template('list2.html', services=services)
-                                            #books=books
 
 @app.route('/create/', methods=('GET', 'POST'))
 def create():
