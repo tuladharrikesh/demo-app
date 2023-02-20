@@ -12,6 +12,7 @@ app = Flask(__name__)
 def get_db_connection():
 
     secret_name = "demodatabaseAuroraSecret-wne9Ak8tMKhD"
+    
 
     # Create a Secrets Manager Client
     client = boto3.client('secretsmanager')
