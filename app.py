@@ -10,21 +10,12 @@ from flask import Flask, render_template, request, url_for, redirect
 app = Flask(__name__)
 
 def get_db_connection():
+        
+    conn = psycopg2.connect(host='demo-database.cyy3xzejpvft.us-east-1.rds.amazonaws.com',
+                            database='demo_database',
+                            user='postgres',
+                            password='G8-pzvc%pe0mXAaZN!aP}5(s~dUZ') 
 
-    secret_name = "rds!db-96874cdd-abcf-471d-bb2b-71f0ead3c827"
-    
-    # Create a Secrets Manager Client
-    client = boto3.client('secretsmanager')
-
-    # Get the secret value
-
-    response = client.get_secret_value(SecretId=secret_name)
-    secret = json.loads(response['SecretString'])
-
-    conn = psycopg2.connect(host=secret['host'],
-                            database=secret['dbname'],
-                            user=secret['username'],
-                            password=secret['password'])
     return conn
 
 
