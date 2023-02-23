@@ -4,6 +4,7 @@ import json
 import psycopg2
 from flask import Flask, render_template
 from flask import Flask, render_template, request, url_for, redirect
+from botocore.exceptions import ClientError
 
 #pip install Flask psycopg2
 
@@ -12,9 +13,30 @@ app = Flask(__name__)
 def get_db_connection():
 
     secret_name = "rds!db-96874cdd-abcf-471d-bb2b-71f0ead3c827"
+    region_name = "us-east-1"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    try:
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        # For a list of exceptions thrown, see
+        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        raise e
+
+    # Decrypts secret using the associated KMS key.
+    secret = get_secret_value_response['SecretString']
     
     # Create a Secrets Manager Client
-    client = boto3.client('secretsmanager')
+    """client = boto3.client('secretsmanager')
+    
 
     # Get the secret value
 
@@ -24,13 +46,17 @@ def get_db_connection():
     conn = psycopg2.connect(host='demo-database.cyy3xzejpvft.us-east-1.rds.amazonaws.com',
                             database='demo_database',
                             user=secret['username'],
-                            password=secret['password'])
+                            password=secret['password']) """
     
     """conn = psycopg2.connect(host='demo-database.cyy3xzejpvft.us-east-1.rds.amazonaws.com',
                             database='demo_database',
                             user='postgres',
                             password='G8-pzvc%pe0mXAaZN!aP}5(s~dUZ') """
 
+    conn = psycopg2.connect(host='demo-database.cyy3xzejpvft.us-east-1.rds.amazonaws.com',
+                            database='demo_database',
+                            user=secret['username'],
+                            password=secret['password'])
     return conn
 
 
