@@ -40,8 +40,10 @@ def get_db_connection():
 
     
     # secret_name = os.environ.get("SECRET_NAME")
-    secret_name = "{}/demo-app/postgreSql".format(os.environ.get("COPILOT_ENVIRONMENT_NAME")) # test secret name
+    secret_name = "{}/demo-app/postgreSql".format(os.environ.get('COPILOT_ENVIRONMENT_NAME')) # test secret name
     # secret_name = "demo-app/prod/postgreSql" # prod secret name
+
+
 
 
     #secret_name = "rds!db-96874cdd-abcf-471d-bb2b-71f0ead3c827"
