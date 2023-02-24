@@ -8,7 +8,10 @@ from botocore.exceptions import ClientError
 
 #pip install Flask psycopg2
 
+
+
 app = Flask(__name__)
+
 
 def get_db_connection():
 
@@ -36,7 +39,9 @@ def get_db_connection():
 
 
 
-    secret_name = "demo-app/postgreSql"
+    secret_name = os.environ.get("SECRET_NAME")
+    #secret_name = "demo-app/postgreSql" # test secret name
+   # secret_name = "demo-app/prod/postgreSql" # prod secret name
 
 
     #secret_name = "rds!db-96874cdd-abcf-471d-bb2b-71f0ead3c827"
