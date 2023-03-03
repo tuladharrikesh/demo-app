@@ -37,11 +37,11 @@ network:
 #  LOG_LEVEL: info
 
 # secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
-  DB: 
-    secretsmanager: 'demodatabaseAuroraSecret-wne9Ak8tMKhD'
+#   DB: 
+#     secretsmanager: 'demodatabaseAuroraSecret-wne9Ak8tMKhD'
 
-  DB_Password:
-    secretsmanager: 'demodatabaseAuroraSecret-wne9Ak8tMKhD:password::'
+#   DB_Password:
+#     secretsmanager: 'demodatabaseAuroraSecret-wne9Ak8tMKhD:password::'
 
 
 #  GITHUB_TOKEN: GITHUB_TOKEN  # The key is the name of the environment variable, the value is the name of the SSM parameter.
